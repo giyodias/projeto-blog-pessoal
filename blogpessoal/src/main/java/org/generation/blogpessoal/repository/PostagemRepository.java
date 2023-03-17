@@ -1,7 +1,11 @@
 package org.generation.blogpessoal.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
 import org.generation.blogpessoal.model.Postagem;
 
 //@Repository indica que a interface é do tipo repositório (realiza o a interação com
@@ -13,5 +17,7 @@ import org.generation.blogpessoal.model.Postagem;
 //Long representa a PK, que recebeu a annotation @Id na classe postagem
 
 public interface PostagemRepository extends JpaRepository<Postagem, Long>{
+
+	public List <Postagem> findAllByTituloContainingIgnoreCase(@Param("titulo") String titulo);
 	
 }

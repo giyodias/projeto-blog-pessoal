@@ -5,11 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //A annotation @Entity indica que a classe define uma entidade (tabela).
 @Entity
@@ -47,8 +50,26 @@ public class Postagem {
 	//Atributo da classe postagem com o tipo de dado do mySQL convertido em Java
 	private LocalDateTime data;
 
+	//relação entre classes
+	
+	//o relacionamento é de muitos pra um. A classe postagem será o lado
+	//N:1 e terá uma chave relacional da classe temas.
+	@ManyToOne 
+	//Uma parte do json será ignorado.
+	@JsonIgnoreProperties("postagem")
+	//objeto
+	private Tema tema;
 	
 	//Geração dos Getters e Setters.
+	
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+	
 	public Long getId() {
 		return id;
 	}
