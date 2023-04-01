@@ -32,16 +32,16 @@ public class Postagem {
 	
 	//@NotBlank define que o atributo não pode ser nulo.
 	//Através do atributo message é possível exibir uma mensagem para o usuário.
-	@NotBlank(message = "O atributo título é obrigatório")
+	@NotBlank(message = "O título é obrigatório")
 	
 	//@Size define o valor mínimo e o valor máximo de caracteres do atributo
-	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 5 e no máximo 100 caracteres.")
+	@Size(min = 5, max = 100, message = "O título deve conter no mínimo 5 e no máximo 100 caracteres.")
 
 	//Atributo da classe postagem com o tipo de dado do mySQL convertido em Java
 	private String titulo;
 	
-	@NotBlank(message = "O atributo texto é obrigatório")
-	@Size(min = 10, max = 1000, message = "O atriuto texto deve conter no mínimo 10 e no máximo 1000 caracteres.")
+	@NotBlank(message = "O texto é obrigatório")
+	@Size(min = 10, max = 1000, message = "O texto deve conter no mínimo 10 e no máximo 1000 caracteres.")
 	//Atributo da classe postagem com o tipo de dado do mySQL convertido em Java
 	private String texto;
 	
@@ -59,6 +59,12 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	//objeto
 	private Tema tema;
+	
+	//muitas postagens pra um usuário
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+	
 	
 	//Geração dos Getters e Setters.
 	

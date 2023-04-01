@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.generation.blogpessoal.model.Postagem;
 import org.generation.blogpessoal.repository.PostagemRepository;
+import org.generation.blogpessoal.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class PostagemController {
 	private PostagemRepository postagemRepository;
 	
 	@Autowired
-	private PostagemRepository temaRepository;
+	private TemaRepository temaRepository;
 
 	@GetMapping
 	public ResponseEntity<List<Postagem>> getAll(){

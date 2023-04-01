@@ -25,10 +25,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/temas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class TemaController {
-	
-	
 	
 	@Autowired
 	private TemaRepository temaRepository;
@@ -38,7 +36,6 @@ public class TemaController {
 		return ResponseEntity.ok(temaRepository.findAll());
 	}
 
-	//busca por id
 	@GetMapping("/{id}")
 	public ResponseEntity<Tema> getById(@PathVariable Long id){
 		return temaRepository.findById(id)
@@ -46,11 +43,10 @@ public class TemaController {
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	//busca por descrição
-	//sempre que  busca por outra coisa que não o id ou numero entra o findAllBy--ContainingIgnoreCase
 	@GetMapping("/descricao/{descricao}")
 	public ResponseEntity<List> getByTitle(@PathVariable String descricao){
-		return ResponseEntity.ok(temaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
+		return ResponseEntity.ok(temaRepository
+				.findAllByDescricaoContainingIgnoreCase(descricao));
 	}
 	
 	
@@ -67,8 +63,6 @@ public class TemaController {
 				.body(temaRepository.save(tema)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
-	
-	//metodo delete
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
